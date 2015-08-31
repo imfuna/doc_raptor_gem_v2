@@ -90,8 +90,7 @@ class DocRaptor
     default_options = {
       :page                       => 1,
       :per_page                   => 100,
-      :raise_exception_on_failure => false,
-      :output_format              => "xml",
+      :raise_exception_on_failure => false
     }
     options = default_options.merge(options)
     output_format = options.delete(:output_format)
@@ -163,7 +162,7 @@ class DocRaptor
 
     if block_given?
       ret_val = nil
-      Tempfile.open("docraptor") do |f|
+      Tempfile.open("docraptor", :encoding => "ascii-8bit") do |f|
         f.sync = true
         f.write(response.body)
         f.rewind
